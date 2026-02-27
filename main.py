@@ -1,19 +1,23 @@
+from typing import ClassVar, override
+
 from textual.app import App, ComposeResult
+from textual.binding import BindingType
 from textual.reactive import reactive
 from textual.widgets import Static
 
-MAP_WIDTH = 20
-MAP_HEIGHT = 10
+MAP_WIDTH: int = 20
+MAP_HEIGHT: int = 10
 
 class GameMap(Static):
 # 1. State mgmt : Reactives handle automatic UI updates
-    player_x = reactive(MAP_WIDTH // 2)
-    player_y = reactive(MAP_HEIGHT // 2)
+    player_x: reactive[int] = reactive(MAP_WIDTH // 2)
+    player_y: reactive[int] = reactive(MAP_HEIGHT // 2)
 
+    @override
     def render(self) -> str:
-        lines = []
+        lines: list[str] = []
         for y in range(MAP_HEIGHT) :
-            row = ""
+            row: str = ""
             for x in range(MAP_WIDTH) :
                 if x == self.player_x and y == self.player_y :
                     row += "P"
@@ -23,8 +27,8 @@ class GameMap(Static):
 
         return "\n".join(lines)
 
-class GameApp(App) :
-    BINDINGS = [
+class GameApp(App[None]) :
+    BINDINGS: ClassVar[list[BindingType]] = [
         ("q", "quit", "Quit"),
         ("w", "move_up", "Up"),
         ("s", "move_down", "Down"),
@@ -32,6 +36,7 @@ class GameApp(App) :
         ("d", "move_right", "Right"),
     ]
 
+    @override
     def compose(self) -> ComposeResult :
         yield GameMap()
 
@@ -58,4 +63,4 @@ class GameApp(App) :
 
 if __name__ == "__main__" :
     app = GameApp()
-    app.run()
+    _ = app.run()
