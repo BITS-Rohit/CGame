@@ -5,13 +5,22 @@ from textual.binding import BindingType
 from textual.reactive import reactive
 from textual.widgets import Static
 
+# Import our custom state handlers
+from state import load_state, save_state
+
 MAP_WIDTH: int = 20
 MAP_HEIGHT: int = 10
 
 class GameMap(Static):
-# 1. State mgmt : Reactives handle automatic UI updates
+    # 1. State mgmt : Reactives handle automatic UI updates
     player_x: reactive[int] = reactive(MAP_WIDTH // 2)
     player_y: reactive[int] = reactive(MAP_HEIGHT // 2)
+
+    def on_mount(self) -> None:
+        """Called automatically when the widget is added to the screen."""
+        saved_x, saved_y = load_state(MAP_WIDTH // 2, MAP_HEIGHT // 2)
+        self.player_x = saved_x
+        self.player_y = saved_y
 
     @override
     def render(self) -> str:
@@ -40,25 +49,29 @@ class GameApp(App[None]) :
     def compose(self) -> ComposeResult :
         yield GameMap()
 
-    def action_move_up(self) :
+    def action_move_up(self) -> None:
         game_map = self.query_one(GameMap)
         if game_map.player_y > 0:
             game_map.player_y -= 1
+            save_state(game_map.player_x, game_map.player_y)
 
-    def action_move_down(self): 
+    def action_move_down(self) -> None: 
         game_map = self.query_one(GameMap)
         if game_map.player_y < MAP_HEIGHT - 1 :
             game_map.player_y += 1
+            save_state(game_map.player_x, game_map.player_y)
 
-    def action_move_left(self): 
+    def action_move_left(self) -> None: 
         game_map = self.query_one(GameMap)
         if game_map.player_x > 0 :
             game_map.player_x -= 1
+            save_state(game_map.player_x, game_map.player_y)
 
-    def action_move_right(self): 
+    def action_move_right(self) -> None: 
         game_map = self.query_one(GameMap)
         if game_map.player_x < MAP_WIDTH - 1 :
             game_map.player_x += 1
+            save_state(game_map.player_x, game_map.player_y)
 
 
 if __name__ == "__main__" :

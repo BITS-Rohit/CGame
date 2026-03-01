@@ -25,3 +25,10 @@ dist/
 # cliff.toml
 cliff.toml
 changelog.sh
+
+# KDL file for state
+*.kdl
+
+# Asciinema stuff 
+*.cast
+*.gif
