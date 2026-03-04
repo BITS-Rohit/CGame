@@ -45,14 +45,16 @@ View this link for more information on `uv`
 
 Contributors are welcome.
 
+## Roadmap
+
+Check out the planned roadmap for `CGame` in [ROADMAP.md](./ROADMAP.md).
+
 # 💬 Join the Lab
 
 Building something cool?
 Come hang out in the Discord and show it off.
 
 Share ideas, get feedback, break things, fix them again.
-
-# Join the Discord
 
 <p align="center">
   <a href="https://discord.gg/WnZZjw6F">
