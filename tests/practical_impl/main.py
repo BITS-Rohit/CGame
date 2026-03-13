@@ -8,6 +8,7 @@ from textual.widgets import Static
 from state import load_state, save_state
 from npc import NPC_X, NPC_Y, DialogScreen
 
+
 class GameMap(Static):
     player_x: reactive[int] = reactive(0)
     player_y: reactive[int] = reactive(0)
@@ -27,21 +28,22 @@ class GameMap(Static):
         height: int = self.size.height
         lines: list[str] = []
 
-        for y in range(height) :
+        for y in range(height):
             row: str = ""
-            for x in range(width) :
-                if x == self.player_x and y == self.player_y :
+            for x in range(width):
+                if x == self.player_x and y == self.player_y:
                     row += "P"
                 elif x == NPC_X and y == NPC_Y:
                     row += "N"
-                else :
+                else:
                     # Replaced the dot with an empty space!
-                    row += " " 
+                    row += " "
             lines.append(row)
 
         return "\n".join(lines)
 
-class GameApp(App[None]) :
+
+class GameApp(App[None]):
     CSS: ClassVar[str] = """
     /* Give the whole app a soft, dark-slate background instead of pitch black */
     Screen {
@@ -69,7 +71,7 @@ class GameApp(App[None]) :
         text-align: center;
     }
     """
-    
+
     BINDINGS: ClassVar[list[BindingType]] = [
         ("q", "quit", "Quit"),
         ("w", "move_up", "Up"),
@@ -79,7 +81,7 @@ class GameApp(App[None]) :
     ]
 
     @override
-    def compose(self) -> ComposeResult :
+    def compose(self) -> ComposeResult:
         yield GameMap()
 
     def try_move(self, dx: int, dy: int) -> None:
@@ -91,7 +93,7 @@ class GameApp(App[None]) :
         # Check for NPC collision
         if new_x == NPC_X and new_y == NPC_Y:
             _ = self.push_screen(DialogScreen())
-            return 
+            return
 
         # Check map boundaries
         if 0 <= new_x < game_map.size.width and 0 <= new_y < game_map.size.height:
@@ -102,16 +104,16 @@ class GameApp(App[None]) :
     def action_move_up(self) -> None:
         self.try_move(0, -1)
 
-    def action_move_down(self) -> None: 
+    def action_move_down(self) -> None:
         self.try_move(0, 1)
 
-    def action_move_left(self) -> None: 
+    def action_move_left(self) -> None:
         self.try_move(-1, 0)
 
-    def action_move_right(self) -> None: 
+    def action_move_right(self) -> None:
         self.try_move(1, 0)
 
 
-if __name__ == "__main__" :
+if __name__ == "__main__":
     app = GameApp()
     _ = app.run()

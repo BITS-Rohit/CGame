@@ -1,0 +1,18 @@
+name: Lint
+
+on: 
+    push: 
+    pull_request: 
+
+jobs:
+    ruff-lint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repo 
+              uses: actions/checkout@v6
+            - name: Install uv 
+              uses: astral-sh/setup-uv@v7
+            - name: Install dependencies
+              run: uv sync 
+            - name: Linting step 
+              run: uv run ruff check .

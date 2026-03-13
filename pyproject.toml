@@ -8,6 +8,7 @@ dependencies = [
     "pathlib>=1.0.1",
     "platformdirs>=4.9.2",
     "rich>=14.3.3",
+    "ruff>=0.15.6",
     "textual>=8.0.0",
 ]
 

@@ -1,3 +1,2 @@
-
 class Player:
-    """ A placeholder for player class"""
+    """A placeholder for player class"""

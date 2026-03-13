@@ -33,7 +33,6 @@ class ProfileManager:
         """Number of profiles on disk."""
         return len(self.get_profiles_name())
 
-
     def create_profile(self, profile: ProfileConfig) -> None:
         """Create the full directory structure for a new profile on disk.
 
@@ -65,7 +64,6 @@ class ProfileManager:
             4. Mark profile as inactive (profile.is_active = False).
         """
         pass
-
 
     def remove_profile(self, profile: ProfileConfig) -> None:
         """Permanently delete a profile's directory from disk."""
