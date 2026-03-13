@@ -1,0 +1,21 @@
+name: Format
+
+on: 
+    push: 
+    pull_request: 
+
+jobs:
+    ruff-format:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repo 
+              uses: actions/checkout@v6
+            
+            - name: Install uv 
+              uses: astral-sh/setup-uv@v7
+            
+            - name: Install dependencies
+              run: uv sync 
+            
+            - name: Linting step 
+              run: uv run ruff format --check .

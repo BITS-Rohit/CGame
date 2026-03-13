@@ -12,6 +12,7 @@ class ProfileConfig:
     Paths are resolved by DirectoryManager and injected here, so
     ProfileConfig is a pure data holder — no path logic inside.
     """
+
     name: str
     sshKey: str
     createdAt: int

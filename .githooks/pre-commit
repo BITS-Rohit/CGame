@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+echo "Running Ruff formatter..."
+uv run ruff format .
+
+echo "Running Ruff linter..."
+uv run ruff check . --fix
+
+echo "All checks passed."

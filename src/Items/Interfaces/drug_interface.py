@@ -1,4 +1,4 @@
 from abc import ABC
 
-class Drug(ABC):
-    ...
+
+class Drug(ABC): ...

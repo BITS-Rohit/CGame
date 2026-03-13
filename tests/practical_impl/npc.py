@@ -10,18 +10,17 @@ from textual.widgets import Label
 NPC_X: Final[int] = 10
 NPC_Y: Final[int] = 5
 
-class DialogScreen(ModalScreen[None]) :
+
+class DialogScreen(ModalScreen[None]):
     """A Popup screen that acts as a dialog box"""
 
-    BINDINGS: ClassVar[list[BindingType]] = [
-        ("space", "dismiss", "Close Dialog")
-    ]
+    BINDINGS: ClassVar[list[BindingType]] = [("space", "dismiss", "Close Dialog")]
 
     @override
     def compose(self) -> ComposeResult:
-        with Center() :
-            with Middle() :
+        with Center():
+            with Middle():
                 yield Label(
                     "Hello traveller, it is dangerous to go alone. \n\n[Press SPACE to close]",
-                    id="dialog_box"
+                    id="dialog_box",
                 )

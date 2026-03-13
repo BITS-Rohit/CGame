@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 
 
 class PlayerInterface(ABC):
-
     @abstractmethod
     def move_to(self, **kwargs): ...
 
